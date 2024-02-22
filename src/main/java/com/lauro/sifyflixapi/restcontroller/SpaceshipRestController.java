@@ -6,11 +6,17 @@ import com.lauro.sifyflixapi.service.SpaceshipService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -27,12 +33,12 @@ public class SpaceshipRestController {
 
     @GetMapping(produces = "application/json")
     public ResponseEntity<Page<SpaceshipDto>> getAll() {
-        log.info("[SpaceshipRestController] - Request to getAll spaceships");
+        log.info("[SpaceshipRestController] - Request to getAll");
         return ResponseEntity.ok(this.spaceshipService.getAll());
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<SpaceshipDto> getShipById(@Positive @PathVariable Long id) {
+    public ResponseEntity<SpaceshipDto> getShipById(@PathVariable Long id) {
         log.info("[SpaceshipRestController] - Request to get ships by Id: {}", id);
         return ResponseEntity.ok(this.spaceshipService.getShipById(id));
     }
