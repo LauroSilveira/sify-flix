@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sify-flix-api
+
+  devtools:
+    restart:
+      enabled: true
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url:  jdbc:h2:mem:sify_db
+    username: admin
+    password: admin
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
