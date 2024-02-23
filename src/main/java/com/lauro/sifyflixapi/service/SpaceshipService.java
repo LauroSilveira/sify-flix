@@ -1,21 +1,21 @@
 package com.lauro.sifyflixapi.service;
 
-import com.lauro.sifyflixapi.restcontroller.dto.SpaceshipDto;
+import com.lauro.sifyflixapi.restcontroller.dto.ShipDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface SpaceshipService {
 
-    Page<SpaceshipDto> getAll();
+    Page<ShipDto> getAll();
 
-    SpaceshipDto getShipById(Long id);
+    ShipDto getShipById(Long id);
 
-    List<SpaceshipDto> getShipsByName(String name);
+    List<ShipDto> getShipsByName(String name);
 
-    void saveShip(SpaceshipDto spaceshipDto);
+    void saveShip(ShipDto shipDto);
 
-    SpaceshipDto updateShip(SpaceshipDto spaceshipDto);
+    ShipDto updateShip(ShipDto shipDto);
 
     void deleteShiById(Long id);
 }

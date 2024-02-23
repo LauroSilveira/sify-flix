@@ -1,0 +1,20 @@
+[
+  {
+    "id": 3,
+    "name": "Starfly",
+    "model": "Starfly",
+    "size": 60.4
+  },
+  {
+    "id": 2,
+    "name": "Firefly",
+    "model": "Firefly",
+    "size": 60.4
+  },
+  {
+    "id": 1,
+    "name": "Cruzader",
+    "model": "Cruzader",
+    "size": 60.4
+  }
+]

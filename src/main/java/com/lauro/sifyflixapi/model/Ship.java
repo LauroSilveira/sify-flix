@@ -1,9 +1,7 @@
 package com.lauro.sifyflixapi.model;
 
-import com.lauro.sifyflixapi.restcontroller.dto.SpaceshipDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.lauro.sifyflixapi.restcontroller.dto.ShipDto;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,17 +17,17 @@ import lombok.Setter;
 @Builder
 public class Ship {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String model;
     private Double size;
 
-    public static Ship toEntity(SpaceshipDto spaceshipDto) {
+    public static Ship toEntity(ShipDto shipDto) {
         return Ship.builder()
-                .id(spaceshipDto.id())
-                .name(spaceshipDto.name())
-                .model(spaceshipDto.model())
-                .size(spaceshipDto.size())
+                .name(shipDto.name())
+                .model(shipDto.model())
+                .size(shipDto.size())
                 .build();
     }
 

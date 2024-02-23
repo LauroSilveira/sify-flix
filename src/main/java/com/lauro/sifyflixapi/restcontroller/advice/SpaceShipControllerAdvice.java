@@ -23,7 +23,7 @@ public class SpaceShipControllerAdvice {
     public ResponseEntity<ApiMessage> handleMethodValidationException(HandlerMethodValidationException ex) {
         return ResponseEntity.badRequest().body(ApiMessage.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .message(ex.getMessage())
+                .message(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .build());
     }
 }
