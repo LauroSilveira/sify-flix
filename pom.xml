@@ -11,8 +11,8 @@
     <groupId>com.lauro</groupId>
     <artifactId>sify-flix-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sify-flix-api</name>
 
+    <name>sify-flix-api</name>
     <description>sify-flix-api</description>
 
     <properties>
