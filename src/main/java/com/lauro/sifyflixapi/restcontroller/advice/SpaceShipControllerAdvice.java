@@ -13,8 +13,8 @@ public class SpaceShipControllerAdvice {
 
     @ExceptionHandler({RecordNotFoundException.class})
     public ResponseEntity<ApiMessage> handleRecordNotFoundException(RecordNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiMessage.builder()
-                .httpStatus(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(ex.getHttpStatus()).body(ApiMessage.builder()
+                .httpStatus(ex.getHttpStatus())
                 .message(ex.getMessage())
                 .build());
     }
@@ -23,7 +23,7 @@ public class SpaceShipControllerAdvice {
     public ResponseEntity<ApiMessage> handleMethodValidationException(HandlerMethodValidationException ex) {
         return ResponseEntity.badRequest().body(ApiMessage.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .message(ex.getMessage())
+                .message(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .build());
     }
 }

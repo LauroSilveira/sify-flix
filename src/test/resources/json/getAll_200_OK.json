@@ -1,0 +1,32 @@
+[
+  {
+    "id": 5,
+    "name": "Firefly",
+    "model": "Firefly",
+    "size": 145.4
+  },
+  {
+    "id": 4,
+    "name": "Thunderbird",
+    "model": "Thunderbird",
+    "size": 76.4
+  },
+  {
+    "id": 3,
+    "name": "Serenity",
+    "model": "Serenity",
+    "size": 93.4
+  },
+  {
+    "id": 2,
+    "name": "USS Enterprise",
+    "model": "USS Enterprise",
+    "size": 60.4
+  },
+  {
+    "id": 1,
+    "name": "Millennium Falcon",
+    "model": "Millennium Falcon",
+    "size": 45.4
+  }
+]
