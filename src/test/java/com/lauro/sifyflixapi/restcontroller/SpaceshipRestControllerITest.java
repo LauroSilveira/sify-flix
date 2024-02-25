@@ -33,7 +33,7 @@ class SpaceshipRestControllerITest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.numberOfElements").isEqualTo(7)
+                .jsonPath("$.numberOfElements").isEqualTo(8)
                 .jsonPath("$.content");
 
         assertThat(content).isNotNull();

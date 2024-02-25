@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  sify-flix-api:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    container_name: 'sify-flix-api'
