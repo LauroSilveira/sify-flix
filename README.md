@@ -7,6 +7,7 @@
 * [How to run](#how-to-run)
     * [Run with Docker](#run-with-docker-compose)
     * [Run with mvn spring-boot:run](#run-with-mvn-spring-boot)
+* [how to run Test](#run-tests)
 * [Contributors](#contributors)
 
 # About
@@ -41,6 +42,14 @@ docker-compose up
 ### Run with mvn spring-boot
 ```shell
 mvn spring-boot:run
+```
+
+# Run tests
+
+<p>This application has unity tests and integration tests, once it use Maven just run:</p>
+
+```
+mvn test
 ```
 
 ## Contributors
