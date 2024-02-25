@@ -20,7 +20,7 @@ public class ParseJson {
      * @param <T>   type of class
      * @return the java object
      */
-    public static <T> T parseToJavaObject(final File file, Class<T> clazz) {
+    protected static <T> T parseToJavaObject(final File file, Class<T> clazz) {
         try {
             return new ObjectMapper().readValue(file, clazz);
         } catch (IOException ex) {
@@ -32,7 +32,7 @@ public class ParseJson {
      * @param json file
      * @return Json {@link File} passed as argument
      */
-    public static File getJsonFile(final String json) {
+    protected static File getJsonFile(final String json) {
 
         try {
             return ResourceUtils.getFile(JSON_FOLDER + json);

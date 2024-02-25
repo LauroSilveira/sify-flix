@@ -1,4 +1,4 @@
-package config;
+package com.lauro.sifyflixapi.cache.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
@@ -11,7 +11,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableCaching
-public class CacheConfig {
+public class CaffeineCacheConfig {
 
     @Bean
     public CacheManager cacheManager() {

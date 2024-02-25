@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,20 +42,19 @@ public class SpaceshipRestController {
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<ShipDto> getShipById(@Positive @PathVariable Long id) {
         log.info("[SpaceshipRestController] - Request to get ships by Id: {}", id);
-        return ResponseEntity.ok(this.spaceshipService.getShipById(id));
+        return ResponseEntity.status(HttpStatus.FOUND).body(this.spaceshipService.getShipById(id));
     }
 
     @GetMapping(value = "/name/{name}", produces = "application/json")
     public ResponseEntity<List<ShipDto>> getShipsByName(@NotBlank @PathVariable String name) {
         log.info("[SpaceshipRestController] - Request to get all ships by Id: {}", name);
-        return ResponseEntity.ok(this.spaceshipService.getShipsByName(name));
+        return ResponseEntity.status(HttpStatus.FOUND).body(this.spaceshipService.getShipsByName(name));
     }
 
     @PostMapping
     public ResponseEntity<ShipDto> saveShip(@Valid @RequestBody ShipDto shipDto) {
         log.info("[SpaceshipRestController] - Request to save a new ship with Id: {}", shipDto.id());
-        this.spaceshipService.saveShip(shipDto);
-        return ResponseEntity.ok(shipDto);
+        return ResponseEntity.ok(this.spaceshipService.saveShip(shipDto));
     }
 
     @PutMapping(produces = "application/json")
@@ -67,6 +67,6 @@ public class SpaceshipRestController {
     public ResponseEntity<Void> deleteShip(@NotNull @PathVariable Long id) {
         log.info("[SpaceshipRestController] - Request to delete ship with Id: {}", id);
         this.spaceshipService.deleteShiById(id);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok().build();
     }
 }

@@ -13,7 +13,7 @@ public interface SpaceshipService {
 
     List<ShipDto> getShipsByName(String name);
 
-    void saveShip(ShipDto shipDto);
+    ShipDto saveShip(ShipDto shipDto);
 
     ShipDto updateShip(ShipDto shipDto);
 
