@@ -1,16 +1,14 @@
-package com.lauro.sifyflixapi.model;
+package com.lauro.sifyflixapi.model.ship;
 
-import com.lauro.sifyflixapi.restcontroller.dto.ShipDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(schema = "sify_schema", name = "ship")
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.cache.config;
+package com.lauro.sifyflixapi.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;

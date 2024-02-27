@@ -1,8 +1,7 @@
 package com.lauro.sifyflixapi.repository;
 
-import com.lauro.sifyflixapi.model.Ship;
+import com.lauro.sifyflixapi.model.ship.Ship;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
