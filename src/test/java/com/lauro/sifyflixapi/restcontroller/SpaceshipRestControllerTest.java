@@ -2,8 +2,9 @@ package com.lauro.sifyflixapi.restcontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lauro.sifyflixapi.jsonutils.ParseJson;
-import com.lauro.sifyflixapi.restcontroller.dto.ShipDto;
-import com.lauro.sifyflixapi.service.SpaceshipService;
+import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
+import com.lauro.sifyflixapi.service.user.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
-@ActiveProfiles("test")
+@WithMockUser(value = "admin", username = "admin", password = "admin", roles = "ADMIN")
 class SpaceshipRestControllerTest extends ParseJson {
     private static final String ROOT_MAPPING = "/ship";
 
@@ -38,6 +41,12 @@ class SpaceshipRestControllerTest extends ParseJson {
 
     @MockBean
     private SpaceshipService spaceshipService;
+
+    @MockBean
+    private AuthenticationManager authenticationManager;
+
+    @MockBean
+    private UserServiceImpl userService;
 
     @BeforeEach
     void setup() {
@@ -126,6 +135,7 @@ class SpaceshipRestControllerTest extends ParseJson {
 
         //When
         final var mvcResult = this.mockMvc.perform(post(ROOT_MAPPING)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf().asHeader())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(newShipDto))
@@ -151,6 +161,7 @@ class SpaceshipRestControllerTest extends ParseJson {
         //When
         final var mvcResult = this.mockMvc.perform(put(ROOT_MAPPING)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf().asHeader())
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(shipToUpdate))
                 )
@@ -169,6 +180,7 @@ class SpaceshipRestControllerTest extends ParseJson {
     void deleteShip() throws Exception {
         //Given
         this.mockMvc.perform(delete(ROOT_MAPPING + "/{id}", 2)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf().asHeader())
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());

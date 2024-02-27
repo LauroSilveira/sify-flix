@@ -1,11 +1,12 @@
 package com.lauro.sifyflixapi.restcontroller;
 
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
-import com.lauro.sifyflixapi.restcontroller.dto.ShipDto;
-import com.lauro.sifyflixapi.service.SpaceshipService;
+import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
@@ -24,11 +25,17 @@ class SpaceshipRestControllerITest {
 
     @Autowired
     private WebTestClient webTestClient;
+
+    private static void accept(HttpHeaders httpHeaders) {
+        httpHeaders.setBasicAuth("lauro", "1234");
+    }
+
     @Test
     void getAllTest() {
         //Then
         final var content = this.webTestClient.get()
                 .uri("/ship")
+                .headers(SpaceshipRestControllerITest::accept)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isOk()
@@ -44,6 +51,7 @@ class SpaceshipRestControllerITest {
         //Then
         final var responseBody = this.webTestClient.get()
                 .uri("/ship/{id}", 1)
+                .headers(SpaceshipRestControllerITest::accept)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isFound()
@@ -61,6 +69,7 @@ class SpaceshipRestControllerITest {
         //then
         final var content = this.webTestClient.get()
                 .uri("/ship/name/{name}", "star")
+                .headers(SpaceshipRestControllerITest::accept)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isFound()
@@ -75,6 +84,7 @@ class SpaceshipRestControllerITest {
     void saveShipTest() {
         final var response = this.webTestClient.post()
                 .uri("/ship")
+                .headers(SpaceshipRestControllerITest::accept)
                 .body(Mono.just(new ShipDto(null, "USS Enterprise", "USS Enterprise", 45.32)), ShipDto.class)
                 .exchange()
                 .expectStatus().isOk()
@@ -95,6 +105,7 @@ class SpaceshipRestControllerITest {
         //Then
         final var response = this.webTestClient.put()
                 .uri("/ship")
+                .headers(SpaceshipRestControllerITest::accept)
                 .body(Mono.just(new ShipDto(1L, "Firefly-Updated", "Firefly-Updated", 123.0)), ShipDto.class)
                 .exchange()
                 .expectAll(responseSpec -> {
@@ -117,6 +128,7 @@ class SpaceshipRestControllerITest {
         //Then
         this.webTestClient.delete()
                 .uri("/ship/{id}", 5)
+                .headers(SpaceshipRestControllerITest::accept)
                 .exchange()
                 .expectStatus().isOk();
 

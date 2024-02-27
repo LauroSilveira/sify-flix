@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontroller.advice;
+package com.lauro.sifyflixapi.restcontrolleradvice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 @Builder
 public class ApiMessage {
+
     private HttpStatus httpStatus;
     private String message;
 }
