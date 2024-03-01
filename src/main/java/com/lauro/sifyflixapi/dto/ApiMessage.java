@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontrolleradvice.dto;
+package com.lauro.sifyflixapi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

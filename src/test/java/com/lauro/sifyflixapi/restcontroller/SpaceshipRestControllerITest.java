@@ -1,7 +1,7 @@
 package com.lauro.sifyflixapi.restcontroller;
 
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
-import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

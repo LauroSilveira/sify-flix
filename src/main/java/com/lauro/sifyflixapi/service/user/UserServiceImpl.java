@@ -1,13 +1,14 @@
 package com.lauro.sifyflixapi.service.user;
 
 import com.lauro.sifyflixapi.model.user.AppUser;
-import com.lauro.sifyflixapi.model.user.roles.Role;
-import com.lauro.sifyflixapi.model.user.roles.RoleName;
+import com.lauro.sifyflixapi.model.roles.Role;
+import com.lauro.sifyflixapi.model.roles.RoleName;
 import com.lauro.sifyflixapi.repository.UserRepository;
-import com.lauro.sifyflixapi.restcontroller.dto.user.UserDto;
+import com.lauro.sifyflixapi.dto.user.UserDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +23,16 @@ public class UserServiceImpl {
 
     public UserDto createUser(UserDto userDto) {
         final var entity = toEntity(userDto);
-        this.userRepository.save(entity);
-        return userDto;
+        final var newUser = this.userRepository.save(entity);
+        return new UserDto(newUser.getUsername(), newUser.getPassword(), newUser.getRoles().stream()
+                .map(Role::getRoleName).map(Enum::name).toList());
+    }
+
+    public List<UserDto> getAllUsers() {
+        final var users = this.userRepository.findAll();
+        return users.stream().map(user -> new UserDto(user.getUsername(), user.getPassword(),
+                user.getRoles().stream().map(Role::getRoleName)
+                        .map(String::valueOf).toList())).toList();
     }
 
     public AppUser toEntity(UserDto dto) {

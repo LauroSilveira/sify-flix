@@ -2,7 +2,7 @@ package com.lauro.sifyflixapi.restcontroller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lauro.sifyflixapi.jsonutils.ParseJson;
-import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
 import com.lauro.sifyflixapi.service.user.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
