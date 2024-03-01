@@ -46,6 +46,8 @@ This API is protected with Spring Security using basic authorization.
 This API is configured to not save sessions.
 Once you have accessed Swagger, simply authenticate with your username and password.
 Notes: Basic authorization mode is **not recommended**, as it is not the most secure.
+When starting the application, a user with the admin role will already be available:
+The is: ```user: admin password:1234```.
 
 # How to Run
 There two options to run this application, run by docker-compose or run as spring-boot.
