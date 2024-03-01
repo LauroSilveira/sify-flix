@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontroller.dto.ship;
+package com.lauro.sifyflixapi.dto.ship;
 
 import jakarta.validation.constraints.NotNull;
 

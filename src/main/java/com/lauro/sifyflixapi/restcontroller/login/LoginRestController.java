@@ -1,6 +1,6 @@
 package com.lauro.sifyflixapi.restcontroller.login;
 
-import com.lauro.sifyflixapi.restcontroller.dto.user.UserDto;
+import com.lauro.sifyflixapi.dto.user.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

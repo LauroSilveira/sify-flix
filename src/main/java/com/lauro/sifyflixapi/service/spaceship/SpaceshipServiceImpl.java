@@ -3,7 +3,7 @@ package com.lauro.sifyflixapi.service.spaceship;
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
 import com.lauro.sifyflixapi.model.ship.Ship;
 import com.lauro.sifyflixapi.repository.SpaceshipRepository;
-import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

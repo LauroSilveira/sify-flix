@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontroller.dto.user;
+package com.lauro.sifyflixapi.dto.user;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.lauro.sifyflixapi.repository;
 
-import com.lauro.sifyflixapi.model.user.roles.Role;
+import com.lauro.sifyflixapi.model.roles.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

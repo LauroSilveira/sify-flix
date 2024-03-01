@@ -1,6 +1,6 @@
 package com.lauro.sifyflixapi.model.user;
 
-import com.lauro.sifyflixapi.model.user.roles.Role;
+import com.lauro.sifyflixapi.model.roles.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

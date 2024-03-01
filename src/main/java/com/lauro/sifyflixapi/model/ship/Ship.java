@@ -1,6 +1,6 @@
 package com.lauro.sifyflixapi.model.ship;
 
-import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

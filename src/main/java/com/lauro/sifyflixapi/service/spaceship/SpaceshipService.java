@@ -1,6 +1,6 @@
 package com.lauro.sifyflixapi.service.spaceship;
 
-import com.lauro.sifyflixapi.restcontroller.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
