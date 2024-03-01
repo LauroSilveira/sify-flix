@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/login")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class LoginRestController {
 
     private final AuthenticationManager authenticationManager;

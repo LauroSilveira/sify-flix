@@ -38,42 +38,37 @@ public class SpaceshipRestController {
     }
 
     @GetMapping(produces = "application/json")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Page<ShipDto>> getAll() {
         log.info("[SpaceshipRestController] - Request to getAll");
         return ResponseEntity.ok(this.spaceshipService.getAll());
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ShipDto> getShipById(@Positive @PathVariable Long id) {
         log.info("[SpaceshipRestController] - Request to get ships by Id: {}", id);
         return ResponseEntity.status(HttpStatus.FOUND).body(this.spaceshipService.getShipById(id));
     }
 
     @GetMapping(value = "/name/{name}", produces = "application/json")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<ShipDto>> getShipsByName(@NotBlank @PathVariable String name) {
         log.info("[SpaceshipRestController] - Request to get all ships by Id: {}", name);
         return ResponseEntity.status(HttpStatus.FOUND).body(this.spaceshipService.getShipsByName(name));
     }
 
     @PutMapping(produces = "application/json")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ShipDto> updateShip(@Valid @RequestBody ShipDto shipDto) {
         log.info("[SpaceshipRestController] - Request to update ship with Id: {}", shipDto.id());
         return ResponseEntity.ok(this.spaceshipService.updateShip(shipDto));
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<ShipDto> saveShip(@Valid @RequestBody ShipDto shipDto) {
         log.info("[SpaceshipRestController] - Request to save a new ship with Id: {}", shipDto.id());
         return ResponseEntity.ok(this.spaceshipService.saveShip(shipDto));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteShip(@NotNull @PathVariable Long id) {
         log.info("[SpaceshipRestController] - Request to delete ship with Id: {}", id);
         this.spaceshipService.deleteShiById(id);
