@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontroller;
+package com.lauro.sifyflixapi.controller;
 
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Mono;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -85,7 +84,7 @@ class SpaceshipRestControllerITest {
         final var response = this.webTestClient.post()
                 .uri("/ship")
                 .headers(SpaceshipRestControllerITest::accept)
-                .body(Mono.just(new ShipDto(null, "USS Enterprise", "USS Enterprise", 45.32)), ShipDto.class)
+                .body((new ShipDto(null, "USS Enterprise", "USS Enterprise", 45.32)), ShipDto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectAll(responseSpec -> responseSpec.expectHeader().contentType(MediaType.APPLICATION_JSON))
@@ -106,7 +105,7 @@ class SpaceshipRestControllerITest {
         final var response = this.webTestClient.put()
                 .uri("/ship")
                 .headers(SpaceshipRestControllerITest::accept)
-                .body(Mono.just(new ShipDto(1L, "Firefly-Updated", "Firefly-Updated", 123.0)), ShipDto.class)
+                .body((new ShipDto(1L, "Firefly-Updated", "Firefly-Updated", 123.0)), ShipDto.class)
                 .exchange()
                 .expectAll(responseSpec -> {
                     responseSpec.expectHeader().contentType(MediaType.APPLICATION_JSON);

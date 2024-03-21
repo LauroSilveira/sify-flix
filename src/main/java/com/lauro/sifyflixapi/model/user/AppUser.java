@@ -24,8 +24,8 @@ public class AppUser implements UserDetails {
     private String username;
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "role_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
     private Set<Role> roles;
 
     @Override

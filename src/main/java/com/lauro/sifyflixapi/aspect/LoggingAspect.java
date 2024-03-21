@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Slf4j
 public class LoggingAspect {
 
-    @Pointcut("execution(* com.lauro.sifyflixapi.restcontroller.spaceship.SpaceshipRestController.getShipById(..))")
+    @Pointcut("execution(* com.lauro.sifyflixapi.controller.spaceship.SpaceshipRestController.getShipById(..))")
     public void logPointcut() {
     }
 

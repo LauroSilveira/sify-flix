@@ -1,7 +1,7 @@
-package com.lauro.sifyflixapi.restcontrolleradvice;
+package com.lauro.sifyflixapi.controlleradvice;
 
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
-import com.lauro.sifyflixapi.restcontroller.spaceship.SpaceshipRestController;
+import com.lauro.sifyflixapi.controller.spaceship.SpaceshipRestController;
 import com.lauro.sifyflixapi.dto.ApiMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

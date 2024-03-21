@@ -1,11 +1,10 @@
-package com.lauro.sifyflixapi.restcontroller.user;
+package com.lauro.sifyflixapi.controller.user;
 
 import com.lauro.sifyflixapi.dto.user.UserDto;
 import com.lauro.sifyflixapi.service.user.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

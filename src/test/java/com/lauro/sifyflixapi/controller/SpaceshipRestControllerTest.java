@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.restcontroller;
+package com.lauro.sifyflixapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lauro.sifyflixapi.jsonutils.ParseJson;
