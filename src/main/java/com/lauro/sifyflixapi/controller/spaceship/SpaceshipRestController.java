@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,9 +55,9 @@ public class SpaceshipRestController {
         return ResponseEntity.status(HttpStatus.FOUND).body(this.spaceshipService.getShipsByName(name));
     }
 
-    @PutMapping(produces = "application/json")
-    public ResponseEntity<ShipDto> updateShip(@Valid @RequestBody ShipDto shipDto) {
-        log.info("[SpaceshipRestController] - Request to update ship with Id: {}", shipDto.id());
+    @PutMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<ShipDto> updateShip(@PathVariable Long id, @Valid @RequestBody ShipDto shipDto) {
+        log.info("[SpaceshipRestController] - Request to update ship with Id: {}", id);
         return ResponseEntity.ok(this.spaceshipService.updateShip(shipDto));
     }
 

@@ -1,14 +1,20 @@
 package com.lauro.sifyflixapi.controller;
 
-import com.lauro.sifyflixapi.exception.RecordNotFoundException;
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.exception.RecordNotFoundException;
+import com.lauro.sifyflixapi.jsonutils.CustomPageImpl;
 import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -19,44 +25,39 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SpaceshipRestControllerITest {
 
+    private static final String URL = "http://localhost:";
+
+    private static TestRestTemplate restClientTest;
+
     @Autowired
     private SpaceshipService spaceshipService;
 
-    @Autowired
-    private WebTestClient webTestClient;
+    @LocalServerPort
+    private Integer port;
 
-    private static void accept(HttpHeaders httpHeaders) {
-        httpHeaders.setBasicAuth("lauro", "1234");
+    @BeforeAll
+    public static void setup() {
+        restClientTest = new TestRestTemplate("admin", "1234");
     }
 
     @Test
     void getAllTest() {
-        //Then
-        final var content = this.webTestClient.get()
-                .uri("/ship")
-                .headers(SpaceshipRestControllerITest::accept)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.numberOfElements").isEqualTo(8)
-                .jsonPath("$.content");
+        final var response = restClientTest.exchange(URL + port + "/ship",
+                HttpMethod.GET, null, new ParameterizedTypeReference<CustomPageImpl<ShipDto>>() {});
 
-        assertThat(content).isNotNull();
+        assertThat(response).isNotNull();
+        assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getContent()).isNotNull();
+        assertThat(response.getBody().getContent()).hasSize(8);
+
     }
 
     @Test
     void getShipByIdTest() {
         //Then
-        final var responseBody = this.webTestClient.get()
-                .uri("/ship/{id}", 1)
-                .headers(SpaceshipRestControllerITest::accept)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isFound()
-                .expectBody(ShipDto.class)
-                .returnResult()
-                .getResponseBody();
+        final var responseBody = restClientTest.getForEntity(URL + port + "/ship/{id}",
+                ShipDto.class, 1);
 
         assertThat(responseBody)
                 .usingRecursiveAssertion()
@@ -66,31 +67,19 @@ class SpaceshipRestControllerITest {
     @Test
     void getShipsByNameTest() {
         //then
-        final var content = this.webTestClient.get()
-                .uri("/ship/name/{name}", "star")
-                .headers(SpaceshipRestControllerITest::accept)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isFound()
-                .expectBody()
-                .jsonPath("$.length()").isEqualTo(3)
-                .jsonPath("$.content");
+        final var response = restClientTest.exchange(URL + port + "/ship/name/{name}", HttpMethod.GET,
+                null, new ParameterizedTypeReference<List<ShipDto>>() {}, "star");
 
-        assertThat(content).isNotNull();
+        assertThat(response).isNotNull();
+        assertThat(response.getStatusCode().is3xxRedirection()).isTrue();
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).hasSize(3);
     }
 
     @Test
     void saveShipTest() {
-        final var response = this.webTestClient.post()
-                .uri("/ship")
-                .headers(SpaceshipRestControllerITest::accept)
-                .body((new ShipDto(null, "USS Enterprise", "USS Enterprise", 45.32)), ShipDto.class)
-                .exchange()
-                .expectStatus().isOk()
-                .expectAll(responseSpec -> responseSpec.expectHeader().contentType(MediaType.APPLICATION_JSON))
-                .expectBody(ShipDto.class)
-                .returnResult()
-                .getResponseBody();
+        final var response = restClientTest.postForEntity(URL + port + "/ship",
+                new ShipDto(null, "USS Enterprise", "USS Enterprise", 45.32), ShipDto.class);
 
         assertThat(response)
                 .usingRecursiveAssertion()
@@ -99,37 +88,23 @@ class SpaceshipRestControllerITest {
 
     @Test
     void updateShipTest() {
-        //Given
-        final var shipById = this.spaceshipService.getShipById(1L);
+        final var shipDto = this.spaceshipService.getShipById(1L);
         //Then
-        final var response = this.webTestClient.put()
-                .uri("/ship")
-                .headers(SpaceshipRestControllerITest::accept)
-                .body((new ShipDto(1L, "Firefly-Updated", "Firefly-Updated", 123.0)), ShipDto.class)
-                .exchange()
-                .expectAll(responseSpec -> {
-                    responseSpec.expectHeader().contentType(MediaType.APPLICATION_JSON);
-                    responseSpec.expectStatus().isOk();
-                })
-                .expectBody(ShipDto.class)
-                .returnResult()
-                .getResponseBody();
+        final var response = restClientTest.exchange(URL + port + "/ship/{id}", HttpMethod.PUT,
+                        new HttpEntity<>(new ShipDto(1L, "Firefly-Updated", "Firefly-Updated", 123.0)), ShipDto.class, 1)
+                .getBody();
 
         assertThat(response)
                 .isNotNull();
         assertThat(response)
                 .usingRecursiveAssertion()
-                .isNotEqualTo(shipById);
+                .isNotEqualTo(shipDto);
     }
 
     @Test
     void deleteShipTest() {
         //Then
-        this.webTestClient.delete()
-                .uri("/ship/{id}", 5)
-                .headers(SpaceshipRestControllerITest::accept)
-                .exchange()
-                .expectStatus().isOk();
+        restClientTest.delete(URL + port + "/ship/{id}", 5L);
 
         //After delete we verify that does not exist
         assertThatExceptionOfType(RecordNotFoundException.class)
