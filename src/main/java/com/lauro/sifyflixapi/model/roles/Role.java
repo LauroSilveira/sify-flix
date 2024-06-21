@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 @Entity
-@Table(schema = "sify_schema", name = "role")
+@Table(schema = "sify_schema")
 @Setter
 @Getter
 @NoArgsConstructor

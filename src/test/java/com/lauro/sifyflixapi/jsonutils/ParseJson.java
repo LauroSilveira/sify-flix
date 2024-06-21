@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ParseJson {
+public abstract class ParseJson {
 
     private static final String JSON_FOLDER = "src/test/resources/json/";
 

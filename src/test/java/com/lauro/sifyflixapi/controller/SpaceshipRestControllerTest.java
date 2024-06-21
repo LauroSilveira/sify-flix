@@ -159,7 +159,7 @@ class SpaceshipRestControllerTest extends ParseJson {
         when(this.spaceshipService.updateShip(any())).thenReturn(shipToUpdate);
 
         //When
-        final var mvcResult = this.mockMvc.perform(put(ROOT_MAPPING)
+        final var mvcResult = this.mockMvc.perform(put(ROOT_MAPPING + "/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf().asHeader())
                         .accept(MediaType.APPLICATION_JSON)
