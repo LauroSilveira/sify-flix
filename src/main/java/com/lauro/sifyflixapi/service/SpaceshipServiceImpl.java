@@ -1,9 +1,10 @@
-package com.lauro.sifyflixapi.service.spaceship;
+package com.lauro.sifyflixapi.service;
 
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
 import com.lauro.sifyflixapi.model.ship.Ship;
 import com.lauro.sifyflixapi.repository.SpaceshipRepository;
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
+import com.lauro.sifyflixapi.service.SpaceshipService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -77,7 +78,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
         log.info("[SpaceshipServiceImpl] - Found Ship with id: {}", shipDto.id());
         final var entity = entityOptional.map(e -> new Ship(e.getId(), e.getName(), e.getName(),
                         e.getSize()))
-                .orElseThrow(() -> new RecordNotFoundException("Ship not found with Id " + shipDto.id(), HttpStatus.CREATED));
+                .orElseThrow(() -> new RecordNotFoundException("Ship not found with Id " + shipDto.id(), HttpStatus.NOT_FOUND));
         this.repository.save(entity);
         return shipDto;
     }

@@ -3,7 +3,7 @@ package com.lauro.sifyflixapi.controller;
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import com.lauro.sifyflixapi.exception.RecordNotFoundException;
 import com.lauro.sifyflixapi.jsonutils.CustomPageImpl;
-import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
+import com.lauro.sifyflixapi.service.SpaceshipService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
