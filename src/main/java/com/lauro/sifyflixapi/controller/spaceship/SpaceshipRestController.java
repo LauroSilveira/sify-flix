@@ -2,7 +2,7 @@ package com.lauro.sifyflixapi.controller.spaceship;
 
 
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
-import com.lauro.sifyflixapi.service.spaceship.SpaceshipService;
+import com.lauro.sifyflixapi.service.SpaceshipService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

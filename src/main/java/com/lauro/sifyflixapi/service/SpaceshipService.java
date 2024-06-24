@@ -1,4 +1,4 @@
-package com.lauro.sifyflixapi.service.spaceship;
+package com.lauro.sifyflixapi.service;
 
 import com.lauro.sifyflixapi.dto.ship.ShipDto;
 import org.springframework.data.domain.Page;
